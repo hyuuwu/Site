@@ -1,0 +1,35 @@
+body{
+    background-image: url("https://upload.wikimedia.org/wikipedia/en/6/61/Kendrick_Lamar_-_Not_Like_Us.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#icarly{
+    border: 5px solid rgb(173, 65, 32);
+
+}
+
+#smth2{
+    color: rgb(255, 89, 0);
+    font: italic 200;
+    width: 500px;
+
+}
+
+#tpdoe{
+    width: 40%;
+}
+
+#this{
+
+    color: rgb(159, 152, 255);
+
+}
+
+#anotherid{
+    color: darkblue;
+}
+
+#wbsitelink{
+    width: 20% ;
+}
