@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leno Brega</title>
+    <script src="leno.js"></script>
+    <link rel="shortcut icon" href="leno.ico" type="image/x-icon">
+    <style>
+        body {
+            background-image: url("https://i.scdn.co/image/ab6761610000e5eb5d2dd9588d60e40a1e299dae");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Ask the user if they want the audio muted
+        const isMuted = confirm("selecione nao/no/no");
+        window.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('main-audio');
+            audio.muted = isMuted;
+            // Hide the audio controls
+            audio.controls = false;
+            // Try to play only after a user gesture
+            document.body.addEventListener('click', function() {
+                audio.play();
+            }, { once: true });
+        });
+    </script>
+    </script>
+    <audio id="main-audio" controls autoplay>
+        <source src="Mulher Peidona.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <img src="https://i.scdn.co/image/ab6761610000e5eb5d2dd9588d60e40a1e299dae" alt="" sizes="100vw" style="width: 100%; height: auto;">
+</body>
+</html>
