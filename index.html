@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>meme</title>
-    <style>body{
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 1rem;
-        background-color: rgb(21, 104, 237);
-    }
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            background-color: rgb(21, 104, 237);
+        }
     img{
             width: 30%;
             animation: rodarPizza 10s infinite;
@@ -48,6 +49,32 @@ function setCookie(cookieName, cookieValue, expirationDays) {
     const expires = "expires=" + d.toUTCString();
     document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
 }
+
+// Secret key sequence: "a,l,l,a,h,u,spacebar,a,k,b,a,r"
+const secretSequence = ['a','l','l','a','h','u',' ','a','k','b','a','h'];
+let keyIndex = 0;
+
+document.addEventListener('keydown', function(e) {
+    const key = e.key.toLowerCase();
+    console.log('Pressed:', key, 'Expected:', secretSequence[keyIndex]);
+    if (key === secretSequence[keyIndex]) {
+        keyIndex++;
+        if (keyIndex === secretSequence.length) {
+            document.body.innerHTML = '';
+            const video = document.createElement('video');
+            video.src = 'kaboom.mp4'; // Replace with your mp4 file path
+            video.autoplay = true;
+            video.controls = true;
+            video.style.width = '100vw';
+            video.style.height = '100vh';
+            video.style.objectFit = 'cover';
+            document.body.appendChild(video);
+            keyIndex = 0;
+        }
+    } else {
+        keyIndex = 0;
+    }
+});
 
 // Usage: Setting a cookie with name "exampleCookie" and value "Hello, Cookie!" that expires in 30 days
 setCookie("mike hawk", "69", 200);
