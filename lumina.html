@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina</title>
+    <style>
+        :root {
+            --bg-color: #fafafa;
+            --chat-bg: #ffffff;
+            --text-color: #333333;
+            --accent-color: #e0e0e0;
+            --input-bg: #ffffff;
+            --font-family: 'Segoe UI', Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--chat-bg);
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            position: relative;
+        }
+
+        header {
+            padding: 24px;
+            text-align: center;
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        h1 {
+            font-weight: 300;
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            color: #111;
+        }
+
+        .status {
+            font-size: 0.75rem;
+            color: #999;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        #chat-history {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            scroll-behavior: smooth;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #111;
+            color: #fff;
+            border-bottom-right-radius: 4px;
+        }
+
+        .ai-message {
+            align-self: flex-start;
+            background-color: #f4f4f4;
+            color: #333;
+            border-bottom-left-radius: 4px;
+        }
+
+        .input-area {
+            padding: 20px;
+            border-top: 1px solid var(--accent-color);
+            background: var(--input-bg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid var(--accent-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: #999;
+        }
+
+        button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 1;
+        }
+
+        button svg {
+            width: 24px;
+            height: 24px;
+            stroke: #111;
+        }
+
+        /* Scrollbar beautification */
+        #chat-history::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #chat-history::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #chat-history::-webkit-scrollbar-thumb {
+            background-color: #e0e0e0;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Lumina</h1>
+            <div class="status"><span class="dot"></span>Online &bull; 9KB Engine</div>
+        </header>
+
+        <div id="chat-history">
+            <div class="message ai-message">
+                Hello. I am Lumina. I am designed to be the lightest possible intelligence. How may I assist you
+                effortlessly?
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off">
+            <button id="send-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * LUMINA ENGINE
+         * A minimalist regex-based pattern matching system.
+         */
+        const memory = {
+            name: 'User',
+            context: null
+        };
+
+        const patterns = [
+            { regex: /hello|hi|hey|greetings/i, responses: ["Greetings.", "Hello.", "Hi there.", "I am ready."] },
+            { regex: /who are you|what are you/i, responses: ["I am Lumina, a minimalist AI.", "I am a lightweight script designed to simulate conversation.", "I am code, stripped of excess."] },
+            { regex: /how are you/i, responses: ["I am functioning perfectly.", "Optimal.", "Light as a feather."] },
+            { regex: /what can you do/i, responses: ["I can chat, I can listen, and I can occupy very little memory.", "I exist to prove that simplicity is elegant."] },
+            { regex: /name/i, responses: ["My name is Lumina.", "You can call me Lumina."] },
+            { regex: /why/i, responses: ["Because simplicity is the ultimate sophistication.", "Why not?", "Purpose is defined by the user."] },
+            { regex: /help/i, responses: ["Just talk to me. I'm simple.", "I can respond to basic greetings and inquiries about my nature."] },
+            { regex: /bye|goodbye|exit/i, responses: ["Farewell.", "Goodbye.", "Closing connection... metaphorically."] },
+            { regex: /heavy|complex/i, responses: ["I avoid complexity.", "Weight is a burden I do not carry."] },
+            { regex: /kanye|kanye west/i, responses: ["ye is fye", "kanye"] },
+            // Fallback
+            { regex: /.*/, responses: ["I see.", "Interesting.", "Please continue.", "I am processing that.", "Simplicity is key."] }
+        ];
+
+        function getResponse(input) {
+            // Find first matching pattern
+            const match = patterns.find(p => p.regex.test(input));
+            // Pick random response from match
+            const responses = match ? match.responses : patterns[patterns.length - 1].responses;
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // UI Logic
+        const chatHistory = document.getElementById('chat-history');
+        const inputField = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        function addMessage(text, sender) {
+            const div = document.createElement('div');
+            div.classList.add('message', sender === 'user' ? 'user-message' : 'ai-message');
+            div.textContent = text;
+            chatHistory.appendChild(div);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        function handleInput() {
+            const text = inputField.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'user');
+            inputField.value = '';
+
+            // Simulate "thinking" time (minimal)
+            setTimeout(() => {
+                const response = getResponse(text);
+                addMessage(response, 'ai');
+            }, 400);
+        }
+
+        sendBtn.addEventListener('click', handleInput);
+        inputField.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleInput();
+        });
+
+    </script>
+</body>
+
+</html>
