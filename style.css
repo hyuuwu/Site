@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --terminal-bg: #0a0a0a;
+    --terminal-text: #4af626;
+    --terminal-dim: #2e8b57;
+    --terminal-highlight: #fdf6e3;
+    --font-stack: 'Fira Code', 'Courier New', monospace;
+    --glow: 0 0 10px rgba(74, 246, 38, 0.5), 0 0 2px rgba(74, 246, 38, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--terminal-bg);
+    color: var(--terminal-text);
+    font-family: var(--font-stack);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem;
+    overflow-x: hidden;
+    text-shadow: 0 0 2px rgba(74, 246, 38, 0.2);
+    padding: 2rem;
+    overflow-x: hidden;
+    text-shadow: 0 0 2px rgba(74, 246, 38, 0.2);
+    cursor: none;
+    /* Hide default cursor */
+}
+
+/* Custom Mouse Cursor */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--terminal-text);
+    background-color: rgba(74, 246, 38, 0.2);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+    mix-blend-mode: difference;
+}
+
+.custom-cursor.active {
+    width: 30px;
+    height: 30px;
+    background-color: rgba(74, 246, 38, 0.5);
+    border-style: dashed;
+}
+
+::selection {
+    background: var(--terminal-text);
+    color: var(--terminal-bg);
+}
+
+/* CRT Scanline Effect */
+body::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+
+/* Container */
+.terminal-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Structure */
+header {
+    margin-bottom: 2rem;
+}
+
+section {
+    margin-bottom: 3rem;
+    opacity: 0;
+    /* Hidden initially for animation */
+    animation: fadeIn 0.5s forwards;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--terminal-text);
+}
+
+h2 {
+    border-bottom: 1px solid var(--terminal-dim);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+a {
+    color: var(--terminal-text);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--terminal-dim);
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    background-color: var(--terminal-text);
+    color: var(--terminal-bg);
+    box-shadow: var(--glow);
+}
+
+/* Interactive Elements */
+.prompt {
+    color: #ff79c6;
+    /* Dracula Pink or similar for user */
+    margin-right: 0.5rem;
+}
+
+.directory {
+    color: #8be9fd;
+    /* Cyan */
+}
+
+.command {
+    color: var(--terminal-text);
+}
+
+/* Cursor */
+.cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background-color: var(--terminal-text);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Utility */
+.hidden {
+    display: none;
+}
+
+.typing-text::after {
+    content: '█';
+    animation: blink 1s step-end infinite;
+}
+
+.typing-done::after {
+    content: '';
+    animation: none;
+}
