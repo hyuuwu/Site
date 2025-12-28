@@ -56,6 +56,18 @@ document.addEventListener('DOMContentLoaded', () => {
             cursor.classList.remove('active');
         });
     });
+
+    // Glitch Effect (Every 15s)
+    setInterval(() => {
+        const container = document.querySelector('.terminal-container');
+        console.log("Glitch triggered!");
+        container.classList.add('glitch-active');
+
+        // Remove after a burst (1s)
+        setTimeout(() => {
+            container.classList.remove('glitch-active');
+        }, 1000);
+    }, 15000);
 });
 
 // Optional: Add a real character-by-character typing function if requested
