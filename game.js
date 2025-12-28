@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Konami Code Logic ---
     const konamiCode = [
         'ArrowUp', 'ArrowUp',
         'ArrowDown', 'ArrowDown',
@@ -9,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     let konamiIndex = 0;
 
-    // --- Game Logic Top Scope ---
     const overlay = document.getElementById('game-overlay');
     const screen = document.getElementById('game-screen');
     const player = document.getElementById('player');
@@ -17,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const message = document.getElementById('game-message');
 
     let gameRunning = false;
-    let gameReady = false; // New state for "Overlay Open but waiting"
+    let gameReady = false;
     let score = 0;
     let birdY = 200;
     let velocity = 0;
@@ -27,14 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let frameId;
     let pipeInterval;
 
-    // Global listener for Konami code AND Game Input
     document.addEventListener('keydown', (e) => {
-        // 1. Check Konami Code (only if game is closed)
         if (!gameRunning && !gameReady) {
             if (e.key === konamiCode[konamiIndex]) {
                 konamiIndex++;
                 if (konamiIndex === konamiCode.length) {
-                    initGame(); // Prepare game
+                    initGame();
                     konamiIndex = 0;
                 }
             } else {
@@ -43,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 2. Handle Game Ready State (Waiting for Start)
         if (gameReady && !gameRunning) {
             if (e.key === ' ' || e.key === 'Enter') {
                 startGame();
@@ -53,12 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 3. Handle Running Game Input
         if (gameRunning) {
             if (e.key === ' ' || e.key === 'ArrowUp') {
                 velocity = jumpStrength;
             } else if (e.key === 'Escape') {
-                stopGame(); // Pause or Die? Let's just die/quit for now
+                stopGame();
             }
         }
     });
@@ -73,29 +67,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startGame() {
-        gameReady = false; // We are now running
+        gameReady = false;
         gameRunning = true;
         resetGameVariables();
-        message.style.display = 'none'; // Hide message
+        message.style.display = 'none';
 
-        // Start Loop
         requestAnimationFrame(gameLoop);
 
-        // Pipe Spawning
         pipeInterval = setInterval(createPipe, 2000);
     }
 
     function stopGame() {
         gameRunning = false;
-        // logic to stay in "died" state or return to "gameReady"? 
-        // Let's go to "Ended" state which waits for reset or quit
         cancelAnimationFrame(frameId);
         clearInterval(pipeInterval);
 
         message.innerText = `GAME OVER\nSCORE: ${score}\nPRESS SPACE TO RESTART\nESC TO QUIT`;
         message.style.display = 'block';
 
-        // We set gameReady true so the main listener catches Space(Restart) or Escape(Quit)
         gameReady = true;
     }
 
@@ -104,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
         gameRunning = false;
         overlay.classList.add('hidden');
         resetGameVariables();
-        // Remove pipes visual
         pipes.forEach(p => {
             if (p.top) p.top.remove();
             if (p.bottom) p.bottom.remove();
@@ -116,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
         score = 0;
         birdY = 200;
         velocity = 0;
-        // Clear pipes logic
         pipes.forEach(p => {
             if (p.top) p.top.remove();
             if (p.bottom) p.bottom.remove();
@@ -163,11 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function gameLoop(time) {
         if (!gameRunning) return;
 
-        // Physics
         velocity += gravity;
         birdY += velocity;
 
-        // Floor/Ceiling collision
         if (birdY < 0 || birdY > 380) {
             stopGame();
             return;
@@ -175,22 +160,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         updateBird();
 
-        // Pipe Logic
-        // We iterate backwards or just handle carefully to avoid index issues with splice
         for (let i = pipes.length - 1; i >= 0; i--) {
             let bg = pipes[i];
-            bg.x -= 3; // speed
+            bg.x -= 3;
             bg.top.style.left = bg.x + 'px';
             bg.bottom.style.left = bg.x + 'px';
 
-            // Score
             if (!bg.passed && bg.x < 50) {
                 score++;
                 bg.passed = true;
                 updateScore();
             }
 
-            // Clean up
             if (bg.x < -60) {
                 bg.top.remove();
                 bg.bottom.remove();
@@ -198,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 continue;
             }
 
-            // Collision
             const birdRect = player.getBoundingClientRect();
             const topRect = bg.top.getBoundingClientRect();
             const bottomRect = bg.bottom.getBoundingClientRect();
@@ -221,6 +201,5 @@ document.addEventListener('DOMContentLoaded', () => {
             r2.bottom < r1.top);
     }
 
-    // Set initial bird left
     player.style.left = '50px';
 });
