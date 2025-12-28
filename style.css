@@ -55,6 +55,74 @@ body {
     border-style: dashed;
 }
 
+/* Game Overlay */
+#game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(10, 10, 10, 0.95);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#game-overlay.hidden {
+    display: none;
+}
+
+#game-screen {
+    width: 800px;
+    height: 400px;
+    border: 2px solid var(--terminal-text);
+    position: relative;
+    overflow: hidden;
+    background-color: #000;
+}
+
+#score-board {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+#game-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    background-color: #000;
+    padding: 10px;
+    border: 1px dashed var(--terminal-text);
+    display: none;
+}
+
+.bird {
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    color: var(--terminal-text);
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.pipe {
+    position: absolute;
+    width: 50px;
+    background-color: var(--terminal-text);
+    /* For TUI look, maybe use characters? For now block is cleaner */
+}
+
+/* Use characters for pipe to be more TUI-like if desired, 
+   but solid blocks are better for collision precision. */
+
 ::selection {
     background: var(--terminal-text);
     color: var(--terminal-bg);
