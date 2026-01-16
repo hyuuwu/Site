@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.spinning-text-wrapper {
+    perspective: 1000px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.spinning-text {
+    font-size: 60px;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 
+        0 0 10px #00ff00,
+        0 0 20px #00ff00,
+        0 0 30px #00ff00,
+        4px 4px 0px #000,
+        8px 8px 0px rgba(0, 255, 0, 0.3);
+    transform-style: preserve-3d;
+    animation: spin3d 3s linear infinite;
+    letter-spacing: 0.1em;
+    image-rendering: pixelated;
+    text-rendering: optimizeSpeed;
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+    transform-origin: center center;
+    transition: transform 0.1s;
+}
+
+.spinning-text:hover {
+    color: #00ffff;
+    text-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff,
+        4px 4px 0px #000,
+        8px 8px 0px rgba(0, 255, 255, 0.3);
+}
+
+@keyframes spin3d {
+    0% {
+        transform: rotateY(0deg) rotateX(10deg);
+    }
+    100% {
+        transform: rotateY(360deg) rotateX(10deg);
+    }
+}
+
+.bottom-text {
+    position: absolute;
+    bottom: 50px;
+    font-size: 32px;
+    color: #00ff00;
+    text-shadow: 
+        0 0 5px #00ff00,
+        2px 2px 0px #000;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    image-rendering: pixelated;
+    text-rendering: optimizeSpeed;
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+    animation: flicker 2s infinite;
+}
+
+@keyframes flicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* PS1-style scanlines effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Low-res effect */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 4px);
+    pointer-events: none;
+    z-index: 999;
+}
+
+@media (max-width: 768px) {
+    .spinning-text {
+        font-size: 50px;
+    }
+    
+    .bottom-text {
+        font-size: 20px;
+    }
+}
