@@ -161,6 +161,7 @@ a:hover {
     color: var(--terminal-text);
 }
 
+
 .cursor {
     display: inline-block;
     width: 10px;
@@ -285,4 +286,6 @@ a:hover {
     position: absolute;
     width: 50px;
     background-color: var(--terminal-text);
+
 }
+
