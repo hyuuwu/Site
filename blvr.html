@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BLVR.">
+    <title>BLVR</title>
+    <link rel="stylesheet" href="styles4.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="prototypeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <div class="modal-icon">⚠️</div>
+            <h2>THIS IS A TEST</h2>
+            <p>this is a prototype,dumbass. the images are ai cz i dont make clothes(yet)</p>
+            <p class="modal-sub">if u like it,go to yeezy.com</p>
+            <button class="modal-btn" id="modalOk">Got it</button>
+        </div>
+    </div>
+
+    <div id="productDetail" class="product-detail">
+        <button class="back-btn" id="backBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <div class="product-detail-content">
+            <div class="product-detail-image">
+                <img id="detailImage" src="" alt="Product">
+            </div>
+            <div class="product-detail-info">
+                <div class="product-detail-price" id="detailPrice">$0</div>
+                <div class="product-detail-add" id="addBtn">+</div>
+            </div>
+        </div>
+    </div>
+
+    <header class="header" id="header">
+        <div class="logo">BLVR.</div>
+        <nav class="nav">
+            <a href="#" class="nav-link active">NEW</a>
+            <a href="#" class="nav-link">MENS</a>
+            <a href="#" class="nav-link">WOMENS</a>
+            <a href="#" class="nav-link">SLIDES</a>
+            <a href="#" class="nav-link">ACCESSORIES</a>
+        </nav>
+        <button class="cart-btn" id="cartBtn" aria-label="Shopping Cart">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M6 6h15l-1.5 9h-12L6 6z" />
+                <circle cx="9" cy="20" r="1" />
+                <circle cx="18" cy="20" r="1" />
+                <path d="M6 6L5 3H2" />
+            </svg>
+        </button>
+    </header>
+
+    <main class="main" id="mainContent">
+        <div class="product-grid">
+            <div class="product-card" data-price="$420">
+                <div class="product-image">
+                    <img src="images/product-1.png" alt="Black Puffer Jacket">
+                </div>
+                <span class="product-code">PK-01</span>
+            </div>
+            <div class="product-card" data-price="$380">
+                <div class="product-image">
+                    <img src="images/product-2.png" alt="Black Hooded Jacket">
+                </div>
+                <span class="product-code">JC-10</span>
+            </div>
+            <div class="product-card" data-price="$350">
+                <div class="product-image">
+                    <img src="images/product-3.png" alt="Olive Cargo Jacket">
+                </div>
+                <span class="product-code">JC-11</span>
+            </div>
+            <div class="product-card" data-price="$70">
+                <div class="product-image">
+                    <img src="images/product-4.png" alt="Beige Slides">
+                </div>
+                <span class="product-code">SL-03</span>
+            </div>
+            <div class="product-card" data-price="$280">
+                <div class="product-image">
+                    <img src="images/product-5.png" alt="Black Combat Boots">
+                </div>
+                <span class="product-code">BL-01</span>
+            </div>
+            <div class="product-card" data-price="$180">
+                <div class="product-image">
+                    <img src="images/product-6.png" alt="Black Sunglasses">
+                </div>
+                <span class="product-code">SG-03</span>
+            </div>
+            <div class="product-card" data-price="$240">
+                <div class="product-image">
+                    <img src="images/product-7.png" alt="Black Backpack">
+                </div>
+                <span class="product-code">BP-02</span>
+            </div>
+            <div class="product-card" data-price="$450">
+                <div class="product-image">
+                    <img src="images/product-8.png" alt="Camo Puffer Jacket">
+                </div>
+                <span class="product-code">PK-02</span>
+            </div>
+            <div class="product-card" data-price="$160">
+                <div class="product-image">
+                    <img src="images/product-9.png" alt="Gray Washed Jeans">
+                </div>
+                <span class="product-code">WD-02</span>
+            </div>
+            <div class="product-card" data-price="$90">
+                <div class="product-image">
+                    <img src="images/product-10.png" alt="Gray Foam Runners">
+                </div>
+                <span class="product-code">SL-01</span>
+            </div>
+            <div class="product-card" data-price="$520">
+                <div class="product-image">
+                    <img src="images/product-11.png" alt="Beige Trench Coat">
+                </div>
+                <span class="product-code">CT-01</span>
+            </div>
+            <div class="product-card" data-price="$195">
+                <div class="product-image">
+                    <img src="images/product-12.png" alt="Olive Tote Bag">
+                </div>
+                <span class="product-code">BG-03</span>
+            </div>
+            <div class="product-card" data-price="$220">
+                <div class="product-image">
+                    <img src="images/product-13.png" alt="Black Hoodie">
+                </div>
+                <span class="product-code">HD-01</span>
+            </div>
+            <div class="product-card" data-price="$80">
+                <div class="product-image">
+                    <img src="images/product-14.png" alt="White T-Shirt">
+                </div>
+                <span class="product-code">TS-04</span>
+            </div>
+            <div class="product-card" data-price="$65">
+                <div class="product-image">
+                    <img src="images/product-15.png" alt="Black Cap">
+                </div>
+                <span class="product-code">CP-02</span>
+            </div>
+            <div class="product-card" data-price="$120">
+                <div class="product-image">
+                    <img src="images/product-16.png" alt="Black Belt">
+                </div>
+                <span class="product-code">BT-01</span>
+            </div>
+            <div class="product-card" data-price="$340">
+                <div class="product-image">
+                    <img src="images/product-17.png" alt="Black Tactical Vest">
+                </div>
+                <span class="product-code">VS-02</span>
+            </div>
+            <div class="product-card" data-price="$95">
+                <div class="product-image">
+                    <img src="images/product-18.png" alt="Black Wallet">
+                </div>
+                <span class="product-code">WL-01</span>
+            </div>
+        </div>
+    </main>
+
+    <section class="newsletter" id="newsletter">
+        <h3>NEWSLETTER</h3>
+        <form class="newsletter-form" onsubmit="return false;">
+            <input type="email" placeholder="EMAIL ADDRESS" class="newsletter-input">
+            <button type="submit" class="newsletter-btn" id="subscribeBtn">SUBSCRIBE</button>
+        </form>
+    </section>
+
+    <footer class="footer" id="footer">
+        <p class="prototype-notice">BLVR. © 2077</p>
+    </footer>
+
+    <script src="script2.js"></script>
+</body>
+
+</html>
